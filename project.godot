@@ -13,7 +13,10 @@ config_version=5
 config/name="Pancake clicker"
 run/main_scene="uid://boti3t5ybakx8"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
