@@ -1,8 +1,68 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5ghdidm4qnjx"]
+[gd_scene load_steps=15 format=3 uid="uid://b5ghdidm4qnjx"]
 
 [ext_resource type="Script" uid="uid://bdrwrccgoxv8d" path="res://Scripts/control.gd" id="1_ln6v8"]
 [ext_resource type="Texture2D" uid="uid://bmokp5jralhr8" path="res://Assets/Generated_Image_December_09__2025_-_12_27AM-removebg-preview.png" id="1_wh1mt"]
+[ext_resource type="Texture2D" uid="uid://bbuiueh6kh3v4" path="res://Assets/sunburst.png" id="2_a67t6"]
+[ext_resource type="Script" uid="uid://w0c20mn21kis" path="res://Scripts/animations.gd" id="2_peyda"]
+[ext_resource type="FontFile" uid="uid://b0uxr1vadtxpp" path="res://Assets/Fredoka-Bold.ttf" id="3_658l1"]
+[ext_resource type="Script" uid="uid://cgm8jyvo4ji7q" path="res://Scripts/destroy.gd" id="3_lwuyl"]
 [ext_resource type="Script" uid="uid://djpsfq8l7i6p0" path="res://Scripts/stats.gd" id="3_osk8u"]
+[ext_resource type="FontFile" uid="uid://dfya3i2mb0kvn" path="res://Assets/Fredoka-Regular.ttf" id="4_peyda"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_658l1"]
+bg_color = Color(0.9630534, 0.708502, 0.88805294, 1)
+
+[sub_resource type="Animation" id="Animation_lwuyl"]
+resource_name = " spin"
+length = 30.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="Animation" id="Animation_x6dno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5awl"]
+_data = {
+&" spin": SubResource("Animation_lwuyl"),
+&"RESET": SubResource("Animation_x6dno")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_peyda"]
+bg_color = Color(0.54274416, 0.27929127, 0.6237282, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a67t6"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+content_margin_bottom = 5.0
+bg_color = Color(0.19565651, 0.6378854, 0.90267277, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,35 +73,132 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ln6v8")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Indicators" type="Control" parent="."]
+top_level = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Template" type="Label" parent="Indicators"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_658l1")
+theme_override_font_sizes/font_size = 25
+text = "+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_lwuyl")
+
+[node name="Timer" type="Timer" parent="Indicators/Template"]
+
+[node name="LeftPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 825.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_658l1")
+
+[node name="Background" type="TextureRect" parent="LeftPanel"]
+modulate = Color(1, 1, 1, 0.78431374)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 785.0
+offset_bottom = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(372.5, 284)
+texture = ExtResource("2_a67t6")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+script = ExtResource("2_peyda")
 
-[node name="ClickButton" type="TextureButton" parent="CenterContainer"]
+[node name="Stats" type="VBoxContainer" parent="LeftPanel/MarginContainer"]
+layout_mode = 2
+script = ExtResource("3_osk8u")
+
+[node name="PancakeLabel" type="Label" parent="LeftPanel/MarginContainer/Stats"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_658l1")
+theme_override_font_sizes/font_size = 40
+text = "0 Pancakes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PancakeLabel2" type="Label" parent="LeftPanel/MarginContainer/Stats"]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_peyda")
+theme_override_font_sizes/font_size = 25
+text = "0 per second"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="LeftPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ClickButton" type="TextureButton" parent="LeftPanel/MarginContainer/CenterContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture_normal = ExtResource("1_wh1mt")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Stats" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
-script = ExtResource("3_osk8u")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LeftPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_q5awl")
+}
+autoplay = " spin"
 
-[node name="PancakeLabel" type="Label" parent="Stats"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "0 Pancakes"
+[node name="RightPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -327.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_peyda")
+
+[node name="Label" type="Label" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -147.0
+offset_top = 20.0
+offset_right = 147.0
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_658l1")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_a67t6")
+text = "UPGRADES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pancake_changed" from="." to="Stats" method="_on_control_pancake_changed"]
-[connection signal="button_down" from="CenterContainer/ClickButton" to="." method="_on_click_button_button_down"]
+[connection signal="pancake_changed" from="." to="LeftPanel/MarginContainer/Stats" method="_on_control_pancake_changed"]
+[connection signal="pancake_clicked" from="." to="LeftPanel/MarginContainer" method="_on_control_pancake_clicked"]
+[connection signal="timeout" from="Indicators/Template/Timer" to="Indicators/Template" method="_on_timer_timeout"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="." method="_on_click_button_button_down"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_down"]
+[connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_up"]
