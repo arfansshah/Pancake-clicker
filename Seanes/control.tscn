@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5ghdidm4qnjx"]
+[gd_scene load_steps=17 format=3 uid="uid://b5ghdidm4qnjx"]
 
 [ext_resource type="Script" uid="uid://bdrwrccgoxv8d" path="res://Scripts/control.gd" id="1_ln6v8"]
 [ext_resource type="Texture2D" uid="uid://bmokp5jralhr8" path="res://Assets/Generated_Image_December_09__2025_-_12_27AM-removebg-preview.png" id="1_wh1mt"]
@@ -64,6 +64,20 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwuyl"]
+bg_color = Color(0.3890504, 0.6616457, 0.5963232, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6dno"]
+bg_color = Color(0.5789822, 0.6409081, 0.2041145, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -93,6 +107,10 @@ vertical_alignment = 1
 script = ExtResource("3_lwuyl")
 
 [node name="Timer" type="Timer" parent="Indicators/Template"]
+autostart = true
+
+[node name="Incometimer" type="Timer" parent="Indicators/Template"]
+autostart = true
 
 [node name="LeftPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -147,7 +165,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_peyda")
 theme_override_font_sizes/font_size = 25
-text = "0 per second"
+text = "1 per second"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -196,9 +214,39 @@ text = "UPGRADES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CpsUpgradeButton" type="Button" parent="RightPanel"]
+layout_mode = 1
+offset_left = 63.0
+offset_top = 117.0
+offset_right = 272.0
+offset_bottom = 145.0
+theme_override_fonts/font = ExtResource("4_peyda")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_lwuyl")
+text = "+ 2 Clicks per second"
+
+[node name="BuyFarmButton" type="Button" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.51100004
+anchor_top = 0.289
+anchor_right = 0.51100004
+anchor_bottom = 0.289
+offset_left = -104.097015
+offset_top = 22.727997
+offset_right = 106.94296
+offset_bottom = 58.097992
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_x6dno")
+text = "AUNT( Farms +1 pancakes)"
+autowrap_mode = 3
+
 [connection signal="pancake_changed" from="." to="LeftPanel/MarginContainer/Stats" method="_on_control_pancake_changed"]
 [connection signal="pancake_clicked" from="." to="LeftPanel/MarginContainer" method="_on_control_pancake_clicked"]
 [connection signal="timeout" from="Indicators/Template/Timer" to="Indicators/Template" method="_on_timer_timeout"]
+[connection signal="timeout" from="Indicators/Template/Incometimer" to="." method="_on_incometimer_timeout"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="." method="_on_click_button_button_down"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_down"]
 [connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_up"]
