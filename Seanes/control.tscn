@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5ghdidm4qnjx"]
+[gd_scene load_steps=20 format=3 uid="uid://b5ghdidm4qnjx"]
 
 [ext_resource type="Script" uid="uid://bdrwrccgoxv8d" path="res://Scripts/control.gd" id="1_ln6v8"]
 [ext_resource type="Texture2D" uid="uid://bmokp5jralhr8" path="res://Assets/Generated_Image_December_09__2025_-_12_27AM-removebg-preview.png" id="1_wh1mt"]
@@ -77,6 +77,27 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5awl"]
+bg_color = Color(0.8568323, 0.49402195, 0.25306836, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6mot"]
+bg_color = Color(0.9999996, 0.13506365, 0.80493224, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjk41"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -223,7 +244,6 @@ offset_bottom = 145.0
 theme_override_fonts/font = ExtResource("4_peyda")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_lwuyl")
-text = "+ 2 Clicks per second"
 
 [node name="BuyFarmButton" type="Button" parent="RightPanel"]
 layout_mode = 1
@@ -233,15 +253,48 @@ anchor_top = 0.289
 anchor_right = 0.51100004
 anchor_bottom = 0.289
 offset_left = -104.097015
-offset_top = 22.727997
-offset_right = 106.94296
-offset_bottom = 58.097992
+offset_top = 28.677994
+offset_right = 104.902985
+offset_bottom = 56.677994
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_x6dno")
-text = "AUNT( Farms +1 pancakes)"
 autowrap_mode = 3
+
+[node name="PowerCpsButton" type="Button" parent="RightPanel"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 284.39
+offset_right = 272.0
+offset_bottom = 312.39005
+theme_override_fonts/font = ExtResource("4_peyda")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q5awl")
+
+[node name="FactoryButton" type="Button" parent="RightPanel"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 344.6
+offset_right = 272.0
+offset_bottom = 372.6
+theme_override_fonts/font = ExtResource("4_peyda")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b6mot")
+
+[node name="AscendButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 914.0
+offset_top = 448.0
+offset_right = 1068.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_658l1")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjk41")
+text = "ASCEND!!!"
 
 [connection signal="pancake_changed" from="." to="LeftPanel/MarginContainer/Stats" method="_on_control_pancake_changed"]
 [connection signal="pancake_clicked" from="." to="LeftPanel/MarginContainer" method="_on_control_pancake_clicked"]

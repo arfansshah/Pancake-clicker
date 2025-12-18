@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pancake clicker"
-run/main_scene="uid://b5ghdidm4qnjx"
+run/main_scene="uid://hui6e1br7wmr"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [display]

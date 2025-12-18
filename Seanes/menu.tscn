@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://hui6e1br7wmr"]
+
+[ext_resource type="Script" uid="uid://bybtygc3cx7fg" path="res://Scripts/menu.gd" id="1_guxiu"]
+[ext_resource type="Texture2D" uid="uid://bvy764r2y0kbx" path="res://Assets/Generated Image December 18, 2025 - 12_49AM.png" id="2_mwnwr"]
+[ext_resource type="FontFile" uid="uid://b0uxr1vadtxpp" path="res://Assets/Fredoka-Bold.ttf" id="3_pqf7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h08xl"]
+bg_color = Color(0.31535706, 0.5969547, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f53en"]
+bg_color = Color(1, 0.27950582, 0.57489866, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_guxiu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_mwnwr")
+expand_mode = 2
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 228.0
+offset_right = 781.0
+offset_bottom = 314.0
+theme_override_fonts/font = ExtResource("3_pqf7n")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_h08xl")
+text = "PLAY"
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 366.0
+offset_top = 375.0
+offset_right = 779.0
+offset_bottom = 461.0
+theme_override_fonts/font = ExtResource("3_pqf7n")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_f53en")
+text = "QUIT"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
