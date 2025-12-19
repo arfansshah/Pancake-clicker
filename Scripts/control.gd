@@ -13,7 +13,6 @@ const save_path = "user://userdata.save"
 @onready var ascend_button: Button = $AscendButton
 
 
-
 var pancake = 0
 var amount_per_click = 1
 
@@ -24,6 +23,7 @@ signal pancake_changed
 
 
 signal pancake_clicked 
+
 
 
 func _ready() -> void:
